@@ -28,12 +28,20 @@ function App() {
   }, []);
 
   const handleSearch = (query) => {
+    const search = query.toLowerCase().trim();
+
+    // show all when input is empty
+    if (!search) {
+      setFilteredCountries(countries);
+      return;
+    }
+
     const filtered = countries.filter((country) =>
-      country.name.common.toLowerCase().includes(query.toLowerCase())
+      country.name.common.toLowerCase().startsWith(search)
     );
+
     setFilteredCountries(filtered);
   };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-black p-3">
       <h1
